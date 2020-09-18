@@ -1,3 +1,16 @@
+WCAG-Pikaday
+=============
+
+Fork of Pikaday because we needed more WCAG compliance than was available in vanilla Pikaday.
+
+Install with
+
+```shell
+npm install @proreact/wcag-pikaday
+```
+
+### Below this point is the original README
+
 Pikaday
 ========
 

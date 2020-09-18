@@ -1,19 +1,19 @@
 {
-  "name": "wcag-pikaday",
-  "version": "1.8.0",
-  "description": "A refreshing JavaScript Datepicker — lightweight, no dependencies, modular CSS",
+  "name": "@proreact/wcag-pikaday",
+  "version": "1.9.0",
+  "description": "A refreshing JavaScript Datepicker — lightweight, no dependencies, modular CSS. Now WCAG AAA compliant.",
   "keywords": [
     "datepicker",
     "calendar",
     "date"
   ],
-  "homepage": "https://pikaday.com",
-  "bugs": "https://github.com/Pikaday/Pikaday/issues",
+  "homepage": "https://github.com/proreact/WCAG-Pikaday",
+  "bugs": "https://github.com/proreact/WCAG-Pikaday/issues",
   "license": "(0BSD OR MIT)",
   "main": "pikaday.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pikaday/Pikaday.git"
+    "url": "git@github.com:proreact/WCAG-Pikaday.git"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
