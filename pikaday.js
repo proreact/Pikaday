@@ -546,11 +546,10 @@
             e = e || window.event;
 
             if (self.isVisible()) {
-
                 switch(e.keyCode){
                     case 13:
                     case 27:
-                        if (opts.field) {
+                        if (opts.field && e.target.tagName.toLowerCase() === 'input' && e.target.getAttribute('type') !== 'button') {
                             opts.field.blur();
                         }
                         break;
