@@ -4,9 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>Pikaday - pickWholeWeek example</title>
-    <meta name="author" content="Lei Zhao">
     <link rel="stylesheet" href="../css/pikaday.css">
     <link rel="stylesheet" href="../css/site.css">
+    <style>
+        button:focus {
+            outline: 2px black solid;
+        }
+        a:link, a:visited {
+            color: #008;
+        }
+    </style>
 </head>
 <body>
     <a href="https://github.com/Pikaday/Pikaday"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
@@ -16,6 +23,7 @@
     <p class="large">A refreshing JavaScript Datepicker — lightweight, no dependencies, modular CSS.</p>
 
     <button id="toggle">Toggle</button>
+
     <div ref="container"></div>
 
     <h2>What is this?</h2>
@@ -33,9 +41,8 @@
         reposition: false,
         firstDay: 1,
         showWeekNumber: true,
-        showDaysInNextAndPreviousMonths: true,
+        showDaysInNextAndPreviousMonths: false,
         setDefaultDate: true,
-        // TODO: Move this somewhere else
         i18n: {
             previousMonth: "Forrige måned",
             nextMonth: "Næste måned",
@@ -64,7 +71,8 @@
             ],
             weekdaysShort: ["Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"],
             selectMonth   : 'Vælg måned',
-            selectYear    : 'Vælg år'
+            selectYear    : 'Vælg år',
+            selectDate    : 'Vælg dato'
         },
         field: document.getElementById('toggle'),
         container: document.getElementById('container'),

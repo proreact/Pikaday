@@ -271,7 +271,10 @@
             nextMonth     : 'Next Month',
             months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
             weekdays      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-            weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+            weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+            selectMonth   : 'Select month',
+            selectYear    : 'Select year',
+            selectDate    : 'Select date'
         },
 
         // Theme Classname
@@ -314,7 +317,6 @@
                 if(!opts.enableSelectionDaysInNextAndPreviousMonths) {
                     arr.push('is-selection-disabled');
                 }
-
             } else {
                 return '<td class="is-empty"></td>';
             }
@@ -341,7 +343,7 @@
         if (opts.isEndRange) {
             arr.push('is-endrange');
         }
-        return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '">' +
+        return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '"' + (opts.isEmpty ? 'role="presentation"' : '') + '>' +
                  '<button class="pika-button pika-day" type="button" ' +
                     'data-pika-year="' + opts.year + '" data-pika-month="' + opts.month + '" data-pika-day="' + opts.day + '">' +
                         opts.day +
@@ -382,7 +384,7 @@
           , week = hasMoment ? moment(date).isoWeek() : isoWeek(date)
         ;
 
-        return '<td class="pika-week">' + week + '</td>';
+        return '<th class="pika-week">' + week + '</th>';
     },
 
     renderRow = function(days, isRTL, pickWholeWeek, isRowSelected)
@@ -413,7 +415,7 @@
             opts = instance._o,
             isMinYear = year === opts.minYear,
             isMaxYear = year === opts.maxYear,
-            html = '<div id="' + randId + '" class="pika-title" role="heading" aria-live="assertive">',
+            html = '<div id="' + randId + '" class="pika-title" aria-live="assertive" aria-atomic="true">',
             monthHtml,
             yearHtml,
             prev = true,
@@ -426,7 +428,7 @@
                 opts.i18n.months[i] + '</option>');
         }
 
-        monthHtml = '<div class="pika-label">' + opts.i18n.months[month] + '<select class="pika-select pika-select-month" tabindex="-1">' + arr.join('') + '</select></div>';
+        monthHtml = '<div class="pika-label">' + opts.i18n.months[month] + '<select class="pika-select pika-select-month" tabindex="-1" aria-label="' + opts.i18n.selectMonth + '">' + arr.join('') + '</select></div>';
 
         if (isArray(opts.yearRange)) {
             i = opts.yearRange[0];
@@ -441,7 +443,7 @@
                 arr.push('<option value="' + i + '"' + (i === year ? ' selected="selected"': '') + '>' + (i) + '</option>');
             }
         }
-        yearHtml = '<div class="pika-label">' + year + opts.yearSuffix + '<select class="pika-select pika-select-year" tabindex="-1">' + arr.join('') + '</select></div>';
+        yearHtml = '<div class="pika-label">' + year + opts.yearSuffix + '<select class="pika-select pika-select-year" tabindex="-1" aria-label="' + opts.i18n.selectYear + '">' + arr.join('') + '</select></div>';
 
         if (opts.showMonthAfterYear) {
             html += yearHtml + monthHtml;
@@ -469,7 +471,7 @@
 
     renderTable = function(opts, data, randId)
     {
-        return '<table cellpadding="0" cellspacing="0" class="pika-table" role="grid" aria-labelledby="' + randId + '">' + renderHead(opts) + renderBody(data) + '</table>';
+        return '<table class="pika-table" role="grid" aria-label="' + opts.i18n.selectDate + '">' + renderHead(opts) + renderBody(data) + '</table>';
     },
 
 
@@ -657,7 +659,9 @@
         self.el = document.createElement('div');
         self.el.className = 'pika-single' + (opts.isRTL ? ' is-rtl' : '') + (opts.theme ? ' ' + opts.theme : '');
 
-        addEvent(self.el, 'mousedown', self._onMouseDown, true);
+        // addEvent(self.el, 'mousedown', self._onMouseDown, true);
+        // Changed to 'click' to enable keyboard support.
+        addEvent(self.el, 'click', self._onMouseDown, true);
         addEvent(self.el, 'touchend', self._onMouseDown, true);
         addEvent(self.el, 'change', self._onChange);
 
