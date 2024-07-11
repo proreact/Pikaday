@@ -144,6 +144,15 @@
         return to;
     },
 
+    debounce = function (func, wait) {
+        let timeout;
+        return function (...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+    },
+
     fireEvent = function(el, eventName, data)
     {
         var ev;
@@ -710,6 +719,7 @@
         }
     };
 
+    let debouncedFireEvent = debounce(fireEvent, 1000);
 
     /**
      * public Pikaday API
@@ -829,7 +839,9 @@
 
                 if (this._o.field) {
                     this._o.field.value = '';
-                    fireEvent(this._o.field, 'change', { firedBy: this });
+                    debouncedFireEvent(this._o.field, "change", {
+                        firedBy: this,
+                    });
                 }
 
                 return this.draw();
@@ -856,7 +868,9 @@
 
             if (this._o.field) {
                 this._o.field.value = this.toString();
-                fireEvent(this._o.field, 'change', { firedBy: this });
+                debouncedFireEvent(this._o.field, "change", {
+                    firedBy: this,
+                });
             }
             if (!preventOnSelect && typeof this._o.onSelect === 'function') {
                 this._o.onSelect.call(this, this.getDate());
