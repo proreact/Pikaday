@@ -719,7 +719,7 @@
         }
     };
 
-    let debouncedFireEvent = debounce(fireEvent, 300);
+    let debouncedFireEvent = debounce(fireEvent, 1000);
 
     /**
      * public Pikaday API
