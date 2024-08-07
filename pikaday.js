@@ -9,7 +9,9 @@
     'use strict';
 
     var moment;
-    if (typeof exports === 'object') {
+    if (window.moment !== undefined) {
+        moment = window.moment
+    } else if (typeof exports === 'object') {
         // CommonJS module
         // Load moment.js as an optional dependency
         try { moment = require('moment'); } catch (e) {}
