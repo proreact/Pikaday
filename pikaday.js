@@ -9,8 +9,9 @@
     'use strict';
 
     var moment;
-    if (window.moment !== undefined) {
+    if (window.moment) {
         moment = window.moment
+        module.exports = factory(moment);
     } else if (typeof exports === 'object') {
         // CommonJS module
         // Load moment.js as an optional dependency
